@@ -52,8 +52,11 @@ def serializer_code(fields, class_name="GeneratedSerializer"):
     nested_code_to_append = []
     for key, value in fields.items():
         if isinstance(value, OrderedDict):
-            nested_class_name = key.capitalize() + "Serializer"
-            nested_code_to_append.append({"key": key, "value": value, "nested_class_name": nested_class_name})
+            if len(value) == 0:
+                code.append(f"{' ' * 4}{key} = serializers.DictField()")
+            else:
+                nested_class_name = key.capitalize() + "Serializer"
+                nested_code_to_append.append({"key": key, "value": value, "nested_class_name": nested_class_name})
             # code.append(f"{' ' * 4}{key} = serializers.DictField(child={nested_class_name}())")
             # code.extend(serializer_code(value, nested_class_name))
         elif isinstance(value, list) and value and isinstance(value[0], OrderedDict):
@@ -78,160 +81,49 @@ def generate_serializer(json_data, root_class_name):
 # Example usage:
 json_data = """
 {
-    "msg": [
-        {
-            "Authors": [
-                "rafidteam@gmail.com"
+    "msg": {
+        "UserJobMemory": 1024.0,
+        "UserJobCPU": 512.0,
+        "NumberOfApprovalsRequired": 0.0,
+        "RunnerConstraints": {
+            "selectors": [
+                "shared"
             ],
-            "ResourceName": "test-nested-wfgrps-refeed1",
-            "IsActive": "1",
-            "SubResourceId": "/wfgrps/test-nested-wfgrps-refeed1",
-            "Description": "",
-            "ModifiedAt": 1720607883151,
-            "CreatedAt": 1720607883151,
-            "Tags": []
+            "type": "shared"
         },
-        {
-            "Authors": [
-                "richard.loomis@stackguardian.io"
-            ],
-            "ResourceName": "richard-cli-workshop-test",
-            "IsActive": "1",
-            "SubResourceId": "/wfgrps/richard-cli-workshop-test",
-            "Description": "Automatically created by SG when creating a workflow",
-            "ModifiedAt": 1720526630511,
-            "CreatedAt": 1720526630511,
-            "Tags": [
-                "sg-created",
-                "workflow"
-            ]
-        },
-        {
-            "Authors": [
-                "support@stackguardian.io"
-            ],
-            "ResourceName": "stack-upgrade-bug-repro",
-            "IsActive": "1",
-            "SubResourceId": "/wfgrps/stack-upgrade-bug-repro",
-            "Description": "Created automatically with workflows",
-            "ModifiedAt": 1720421208694,
-            "CreatedAt": 1720421208694,
-            "Tags": [
-                "wfs"
-            ]
-        },
-        {
-            "Authors": [
-                "rafidteam@gmail.com"
-            ],
-            "ResourceName": "refeed-8-July",
-            "IsActive": "1",
-            "SubResourceId": "/wfgrps/refeed-8-July",
-            "Description": "",
-            "ModifiedAt": 1720377545101,
-            "CreatedAt": 1720377545101,
-            "Tags": []
-        },
-        {
-            "Authors": [
-                "support@stackguardian.io"
-            ],
-            "ResourceName": "dev-portal-tests",
-            "IsActive": "1",
-            "SubResourceId": "/wfgrps/dev-portal-tests",
-            "Description": "",
-            "ModifiedAt": 1719994865913,
-            "CreatedAt": 1719994865913,
-            "Tags": []
-        },
-        {
-            "Authors": [
-                "richard.loomis@stackguardian.io"
-            ],
-            "ResourceName": "richard-25June-wfgrp",
-            "IsActive": "1",
-            "SubResourceId": "/wfgrps/richard-25June-wfgrp",
-            "Description": "",
-            "ModifiedAt": 1719318131399,
-            "CreatedAt": 1719318131399,
-            "Tags": []
-        },
-        {
-            "Authors": [
-                "richard.loomis@stackguardian.io"
-            ],
-            "ResourceName": "richard-25-June",
-            "IsActive": "1",
-            "SubResourceId": "/wfgrps/richard-25-June",
-            "Description": "",
-            "ModifiedAt": 1719299870097,
-            "CreatedAt": 1719299870097,
-            "Tags": []
-        },
-        {
-            "Authors": [
-                "support@stackguardian.io"
-            ],
-            "ResourceName": "github-app-custom-20-June",
-            "IsActive": "1",
-            "SubResourceId": "/wfgrps/github-app-custom-20-June",
-            "Description": "",
-            "ModifiedAt": 1718827458326,
-            "CreatedAt": 1718827458326,
-            "Tags": []
-        },
-        {
-            "Authors": [
-                "support@stackguardian.io"
-            ],
-            "ResourceName": "test-ar",
-            "IsActive": "1",
-            "SubResourceId": "/wfgrps/test-ar",
-            "Description": "",
-            "ModifiedAt": 1718201848211,
-            "CreatedAt": 1718201848211,
-            "Tags": []
-        },
-        {
-            "Authors": [
-                "support@stackguardian.io"
-            ],
-            "ResourceName": "eks-test-june-5",
-            "IsActive": "1",
-            "SubResourceId": "/wfgrps/eks-test-june-5",
-            "Description": "",
-            "ModifiedAt": 1717586328927,
-            "CreatedAt": 1717586328927,
-            "Tags": []
-        },
-        {
-            "Authors": [
-                "richard.loomis@stackguardian.io"
-            ],
-            "ResourceName": "github-vcs-triggers-test-29-May",
-            "IsActive": "1",
-            "SubResourceId": "/wfgrps/github-vcs-triggers-test-29-May",
-            "Description": "",
-            "ModifiedAt": 1716996682212,
-            "CreatedAt": 1716996682212,
-            "Tags": []
-        },
-        {
-            "Authors": [
-                "richard.loomis@stackguardian.io"
-            ],
-            "ResourceName": "git-auth-module-test",
-            "IsActive": "1",
-            "SubResourceId": "/wfgrps/git-auth-module-test",
-            "Description": "",
-            "ModifiedAt": 1716378647155,
-            "CreatedAt": 1716378647155,
-            "Tags": []
-        }
-    ],
-    "lastevaluatedkey": "eyJsYXN0RXZhbHVhdGVkS2V5cyI6IHsiUmVzb3VyY2VJZCI6ICIvd2ZncnBzL2dpdC1hdXRoLW1vZHVsZS10ZXN0IiwgIlBhcmVudElkIjogIi9vcmdzL2RlbW8tb3JnIiwgIldmR3JwUGFyZW50SWQiOiAiL29yZ3MvZGVtby1vcmciLCAiQ3JlYXRlZEF0IjogMTcxNjM3ODY0NzE1NX19"
+        "IsActive": "1",
+        "Approvers": [],
+        "Tags": [
+            "sg-created"
+        ],
+        "DeploymentPlatformConfig": {},
+        "MiniSteps": {},
+        "Authors": [
+            "larisoncarvalho@gmail.com"
+        ],
+        "WfStepsConfig": [],
+        "ActivitySubscribers": [
+            "larisoncarvalho@gmail.com"
+        ],
+        "SubResourceId": "/wfgrps/testWFG/wfs/1",
+        "OrgId": "/orgs/charming-copper",
+        "CreatedAt": 1719465947703.0,
+        "IsArchive": "0",
+        "Description": "Automatically created by SG",
+        "ResourceId": "/wfs/1",
+        "WfType": "CUSTOM",
+        "ModifiedAt": 1719465949087.0,
+        "ParentId": "/orgs/charming-copper/wfgrps/testWFG",
+        "ResourceType": "WORKFLOW",
+        "LatestWfrunStatus": "ERRORED",
+        "DocVersion": "V3.BETA",
+        "EnvironmentVariables": [],
+        "EnforcedPolicies": [],
+        "ResourceName": "1",
+        "VCSConfig": {},
+        "TerraformConfig": {}
+    }
 }
 """
-
 serializer_str = generate_serializer(json_data, root_class_name="GeneratedSerializer")
 print(serializer_str)
