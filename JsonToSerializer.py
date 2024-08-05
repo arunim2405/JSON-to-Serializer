@@ -114,207 +114,339 @@ def generate_serializer(json_data, root_class_name):
 #Workflows Get
 json_data = """
 {
-    "msg": {
-        "UserJobMemory": 1024.0,
-        "UserJobCPU": 512.0,
-        "NumberOfApprovalsRequired": 0.0,
-        "RunnerConstraints": {
-            "type": "shared"
-        },
-        "IsActive": "1",
-        "Approvers": [],
-        "Tags": [],
-        "DeploymentPlatformConfig": [
-            {
-                "config": {
-                    "profileName": "testAWSConnector",
-                    "integrationId": "/integrations/testAWSConnector"
-                },
-                "kind": "AWS_RBAC"
-            }
+  "msg": {
+    "SGInternals": {
+      "resolvedVCSconfig": {
+        "repo_url": "https://x-access-token:None@github.com/stackguardian/template-tf-aws-s3-demo-website",
+        "repo_name": "template-tf-aws-s3-demo-website",
+        "sparse_path": null,
+        "repo_ref": "main",
+        "repo_local_path": "/var/tmp/workspace/orgs/sg-provider-test/wfgrps/TPS-Test/wfs/aws-s3-demo-website-BGGY/shared-workspace/user/template-tf-aws-s3-demo-website",
+        "workingDir": ""
+      }
+    },
+    "LatestStatus": "COMPLETED",
+    "LatestStatusKey": "on_1_apply-terraform-plan",
+    "IsArchive": "0",
+    "Comments": {
+      "1722437675457": {
+        "createdBy": "taher.kathanawala@stackguardian.io",
+        "comment": "Workflow Run initiated"
+      }
+    },
+    "ResumedWorkflowRun": false,
+    "ResourceId": "/wfruns/o57svbi8gohj",
+    "ModifiedAt": 1722437758940.0,
+    "ParentId": "/orgs/sg-provider-test/wfgrps/TPS-Test/wfs/aws-s3-demo-website-BGGY",
+    "ResourceType": "WORKFLOW_RUN",
+    "RuntimeParameters": {
+      "userJobMemory": 1024.0,
+      "vcsTriggers": {},
+      "tfDriftIacInputData": {},
+      "deploymentPlatformConfigProcessed": {
+        "config": [
+          {
+            "awsDefaultRegion": "eu-central-1",
+            "awsAccessKeyId": "xxx",
+            "awsSecretAccessKey": "xx+x+x"
+          }
         ],
-        "MiniSteps": {
-            "webhooks": {
-                "COMPLETED": [
-                    {
-                        "webhookName": "test",
-                        "webhookSecret": "test",
-                        "webhookUrl": "test"
-                    }
-                ],
-                "DRIFT_DETECTED": [
-                    {
-                        "webhookName": "test",
-                        "webhookSecret": "test",
-                        "webhookUrl": "test"
-                    }
-                ],
-                "ERRORED": [
-                    {
-                        "webhookName": "test",
-                        "webhookSecret": "test",
-                        "webhookUrl": "test"
-                    }
-                ]
-            },
-            "notifications": {
-                "email": {
-                    "APPROVAL_REQUIRED": [],
-                    "CANCELLED": [],
-                    "COMPLETED": [],
-                    "ERRORED": []
-                }
-            },
-            "wfChaining": {
-                "COMPLETED": [],
-                "ERRORED": []
+        "kind": "AWS_STATIC"
+      },
+      "iacTemplate": {
+        "/stackguardian/aws-s3-demo-website:16": {
+          "RuntimeSource": {
+            "sourceConfigDestKind": "GITHUB_COM",
+            "config": {
+              "includeSubModule": false,
+              "ref": "main",
+              "isPrivate": false,
+              "workingDir": "",
+              "repo": "https://github.com/stackguardian/template-tf-aws-s3-demo-website"
             }
-        },
-        "Authors": [
-            "larisoncarvalho@gmail.com"
-        ],
-        "WfStepsConfig": [],
-        "ActivitySubscribers": [
-            "larisoncarvalho@gmail.com"
-        ],
-        "SubResourceId": "/wfgrps/testWFG/wfs/aws-s3-demo-website-vg6P",
-        "OrgId": "/orgs/charming-copper",
-        "CreatedAt": 1720772420966.0,
-        "IsArchive": "0",
-        "Description": "test",
-        "ResourceId": "/wfs/aws-s3-demo-website-vg6P",
-        "WfType": "TERRAFORM",
-        "ModifiedAt": 1720772929216.0,
-        "ParentId": "/orgs/charming-copper/wfgrps/testWFG",
-        "ResourceType": "WORKFLOW",
-        "LatestWfrunStatus": "ERRORED",
-        "DocVersion": "V3.BETA",
-        "EnvironmentVariables": [
-            {
-                "config": {
-                    "textValue": "testvalue",
-                    "varName": "test"
-                },
-                "kind": "PLAIN_TEXT"
-            }
-        ],
-        "EnforcedPolicies": [],
-        "ResourceName": "aws-s3-demo-website-vg6P",
-        "VCSConfig": {
-            "iacVCSConfig": {
-                "iacTemplateId": "/stackguardian/aws-s3-demo-website:16",
-                "useMarketplaceTemplate": true
-            },
-            "iacInputData": {
-                "schemaType": "FORM_JSONSCHEMA",
-                "data": {
-                    "bucket_region": "eu-central-1"
-                }
-            }
-        },
-        "TerraformConfig": {
-            "terraformVersion": "1.5.7",
-            "approvalPreApply": true,
-            "managedTerraformState": true,
-            "terraformPlanOptions": "--run ",
-            "postApplyWfStepsConfig": [
-                {
-                    "name": "post-apply-step-1",
-                    "mountPoints": [],
-                    "wfStepTemplateId": "/stackguardian/terraform:19",
-                    "wfStepInputData": {
-                        "schemaType": "FORM_JSONSCHEMA",
-                        "data": {
-                            "terraformVersion": "1.5.3",
-                            "managedTerraformState": true,
-                            "terraformAction": "plan-destroy"
-                        }
-                    },
-                    "cmdOverride": "test",
-                    "approval": true
-                }
-            ],
-            "prePlanWfStepsConfig": [
-                {
-                    "name": "pre-plan-step-1",
-                    "mountPoints": [],
-                    "wfStepTemplateId": "/stackguardian/terraform:19",
-                    "wfStepInputData": {
-                        "schemaType": "FORM_JSONSCHEMA",
-                        "data": {
-                            "terraformVersion": "1.4.3",
-                            "managedTerraformState": true,
-                            "terraformAction": "plan"
-                        }
-                    },
-                    "cmdOverride": "test",
-                    "approval": true
-                }
-            ],
-            "preApplyWfStepsConfig": [
-                {
-                    "name": "pre-apply-step-1",
-                    "mountPoints": [],
-                    "wfStepTemplateId": "/stackguardian/terraform:19",
-                    "wfStepInputData": {
-                        "schemaType": "FORM_JSONSCHEMA",
-                        "data": {
-                            "terraformVersion": "1.4.1",
-                            "managedTerraformState": true,
-                            "terraformAction": "plan"
-                        }
-                    },
-                    "cmdOverride": "test",
-                    "approval": true
-                }
-            ],
-            "driftCheck": true
+          },
+          "IsArchive": "0",
+          "IsActive": "1",
+          "IsPublic": "1",
+          "CreatedAt": 1696247453148.0,
+          "TemplateName": "aws-s3-demo-website",
+          "OwnerOrg": "/orgs/stackguardian",
+          "TemplateType": "IAC",
+          "TemplateId": "/stackguardian/aws-s3-demo-website:16",
+          "SourceConfigKind": "TERRAFORM"
         }
-    }
+      },
+      "approvers": [],
+      "userJobCpu": 512.0,
+      "wfStepsConfig": [
+        {
+          "name": "generate-terraform-plan",
+          "mountPoints": null,
+          "wfStepTemplateId": "/stackguardian/terraform:19",
+          "wfStepInputData": {
+            "schemaType": "FORM_JSONSCHEMA",
+            "data": {
+              "terraformVersion": "1.5.7",
+              "managedTerraformState": true,
+              "terraformPlanOptions": "",
+              "terraformAction": "plan",
+              "applyPolicy": true
+            }
+          },
+          "timeout": 2100.0,
+          "approval": false
+        },
+        {
+          "name": "apply-terraform-plan",
+          "mountPoints": null,
+          "wfStepTemplateId": "/stackguardian/terraform:19",
+          "wfStepInputData": {
+            "schemaType": "FORM_JSONSCHEMA",
+            "data": {
+              "terraformVersion": "1.5.7",
+              "terraformAction": "apply",
+              "applyPolicy": true,
+              "terraformApplyOptions": ""
+            }
+          },
+          "timeout": 2100.0,
+          "approval": false
+        }
+      ],
+      "cacheConfig": {
+        "path": [
+          "user/repo/.terraform",
+          "user/repo/tf_plan.out"
+        ],
+        "enabled": true,
+        "key": "tf_cache",
+        "policy": "PULL_PUSH"
+      },
+      "miniSteps": {
+        "webhooks": {
+          "COMPLETED": [],
+          "DRIFT_DETECTED": [],
+          "ERRORED": []
+        },
+        "notifications": {
+          "email": {
+            "APPROVAL_REQUIRED": [],
+            "CANCELLED": [],
+            "COMPLETED": [],
+            "ERRORED": []
+          }
+        },
+        "wfChaining": {
+          "COMPLETED": [],
+          "ERRORED": []
+        }
+      },
+      "runnerConstraints": {
+        "selectors": [
+          "shared"
+        ],
+        "type": "shared",
+        "sharedType": "shared-ec2"
+      },
+      "terraformAction": {
+        "action": "apply"
+      },
+      "runTaskDetails": [
+        {
+          "enableExecuteCommand": false,
+          "attachments": [],
+          "memory": "2048",
+          "startedBy": "/orgs/sg-provider-test/wfruns/o57svbi8gohj",
+          "taskArn": "arn:aws:ecs:eu-central-1:476299211833:task/admin-workflow-prod/e12e436e21b94612968aba4bb2b73929",
+          "cpu": "1024",
+          "overrides": {
+            "inferenceAcceleratorOverrides": [],
+            "containerOverrides": [
+              {
+                "name": "admin",
+                "environmentFiles": [
+                  {
+                    "type": "s3",
+                    "value": "arn:aws:s3:::stack-guardian-orchestrator-resources-prod/orgs/sg-provider-test/wfgrps/TPS-Test/wfs/aws-s3-demo-website-BGGY/sg.admin.env"
+                  }
+                ],
+                "environment": [
+                  {
+                    "name": "RUNTIME_TYPE",
+                    "value": "EC2"
+                  }
+                ]
+              }
+            ]
+          },
+          "availabilityZone": "eu-central-1b",
+          "version": 1.0,
+          "tags": [
+            {
+              "value": "/wfgrps/TPS-Test",
+              "key": "wfGrpId"
+            },
+            {
+              "value": "",
+              "key": "stackId"
+            },
+            {
+              "value": "/wfruns/o57svbi8gohj",
+              "key": "wfRunId"
+            },
+            {
+              "value": "prod",
+              "key": "Resource-Type"
+            },
+            {
+              "value": "/wfs/aws-s3-demo-website-BGGY",
+              "key": "wfId"
+            },
+            {
+              "value": "/orgs/sg-provider-test",
+              "key": "orgId"
+            },
+            {
+              "value": "admin-workflow-prod",
+              "key": "aws:ecs:clusterName"
+            }
+          ],
+          "createdAt": "2024-07-31 14:54:38.911000+00:00",
+          "clusterArn": "arn:aws:ecs:eu-central-1:476299211833:cluster/admin-workflow-prod",
+          "taskDefinitionArn": "arn:aws:ecs:eu-central-1:476299211833:task-definition/workflow-engine-admin-prod:244",
+          "attributes": [
+            {
+              "name": "ecs.cpu-architecture",
+              "value": "x86_64"
+            }
+          ],
+          "containers": [
+            {
+              "image": "476299211833.dkr.ecr.eu-central-1.amazonaws.com/workflow-engine/admin:latest",
+              "networkInterfaces": [],
+              "taskArn": "arn:aws:ecs:eu-central-1:476299211833:task/admin-workflow-prod/e12e436e21b94612968aba4bb2b73929",
+              "name": "admin",
+              "cpu": "0",
+              "containerArn": "arn:aws:ecs:eu-central-1:476299211833:container/admin-workflow-prod/e12e436e21b94612968aba4bb2b73929/5977b01c-2d1e-45a2-9370-20e25e218599",
+              "lastStatus": "PENDING"
+            }
+          ],
+          "containerInstanceArn": "arn:aws:ecs:eu-central-1:476299211833:container-instance/admin-workflow-prod/e4722726041d4cf088d8f3ac7b83c56e",
+          "desiredStatus": "RUNNING",
+          "lastStatus": "PENDING",
+          "group": "family:workflow-engine-admin-prod",
+          "launchType": "EC2"
+        }
+      ],
+      "environmentVariables": [],
+      "numberOfApprovalsRequired": 0.0,
+      "deploymentPlatformConfig": [
+        {
+          "config": {
+            "profileName": "sg-nonprod-1",
+            "integrationId": "/integrations/sg-nonprod-1"
+          },
+          "kind": "AWS_STATIC"
+        }
+      ],
+      "workflowStepsTemplates": {
+        "/stackguardian/terraform:19": {
+          "SharedOrgs": {
+            "/orgs/adorsys-test": {},
+            "/orgs/siemens-di": {},
+            "/orgs/wicked-hop": {}
+          },
+          "RuntimeSource": {
+            "sourceConfigDestKind": "CONTAINER_REGISTRY",
+            "config": {
+              "dockerImage": "476299211833.dkr.ecr.eu-central-1.amazonaws.com/workflow-steps/iac-terraform:1719332246-v3.2.5-terraform",
+              "isPrivate": false
+            }
+          },
+          "IsArchive": "0",
+          "IsActive": "1",
+          "IsPublic": "1",
+          "CreatedAt": 1679583161499.0,
+          "TemplateName": "terraform",
+          "OwnerOrg": "/orgs/stackguardian",
+          "TemplateType": "WORKFLOW_STEP",
+          "TemplateId": "/stackguardian/terraform:19",
+          "SourceConfigKind": "DOCKER_IMAGE"
+        }
+      },
+      "iacPoliciesTemplates": {},
+      "vcsConfig": {
+        "iacVCSConfig": {
+          "iacTemplateId": "/stackguardian/aws-s3-demo-website:16",
+          "useMarketplaceTemplate": true
+        },
+        "iacInputData": {
+          "schemaType": "FORM_JSONSCHEMA",
+          "data": {
+            "bucket_region": "eu-central-1"
+          }
+        }
+      },
+      "tfDriftWfRun": false,
+      "enforcedPoliciesRaw": [],
+      "terraformConfig": {
+        "terraformVersion": "1.5.7",
+        "preApplyWfStepsConfig": [],
+        "managedTerraformState": true,
+        "postApplyWfStepsConfig": [],
+        "driftCheck": true,
+        "prePlanWfStepsConfig": []
+      },
+      "wfType": "TERRAFORM"
+    },
+    "TriggerDetails": {},
+    "DocVersion": "V3.BETA",
+    "Authors": [
+      "taher.kathanawala@stackguardian.io"
+    ],
+    "ResourceName": "o57svbi8gohj",
+    "Statuses": {
+      "on_0_generate-terraform-plan": [
+        {
+          "name": "PENDING",
+          "createdAt": 1722437688754.0
+        },
+        {
+          "name": "RUNNING",
+          "createdAt": 1722437694746.0
+        }
+      ],
+      "on_1_apply-terraform-plan": [
+        {
+          "name": "PENDING",
+          "createdAt": 1722437725241.0
+        },
+        {
+          "name": "RUNNING",
+          "createdAt": 1722437731249.0
+        },
+        {
+          "name": "COMPLETED",
+          "createdAt": 1722437758940.0
+        }
+      ],
+      "pre_0_step": [
+        {
+          "name": "QUEUED",
+          "createdAt": 1722437675457.0
+        },
+        {
+          "name": "PENDING",
+          "createdAt": 1722437677940.0
+        }
+      ]
+    },
+    "SubResourceId": "/wfgrps/TPS-Test/wfs/aws-s3-demo-website-BGGY/wfruns/o57svbi8gohj",
+    "OrgId": "/orgs/sg-provider-test",
+    "CreatedAt": 1722437675457.0
+  }
 }
 """
 
-#Workflows ListAll
-# json_data = '''
-# {
-#     "msg": [
-#         {
-#             "GitHubComRepoID": "stackguardian/template-tf-aws-s3-demo-website",
-#             "IsActive": "1",
-#             "Description": "test",
-#             "ResourceId": "/wfs/aws-s3-demo-website-vg6P",
-#             "WfType": "TERRAFORM",
-#             "ModifiedAt": 1720772929216.0,
-#             "ParentId": "/orgs/charming-copper/wfgrps/testWFG",
-#             "LatestWfrunStatus": "ERRORED",
-#             "Tags": [],
-#             "Authors": [
-#                 "larisoncarvalho@gmail.com"
-#             ],
-#             "ResourceName": "aws-s3-demo-website-vg6P",
-#             "SubResourceId": "/wfgrps/testWFG/wfs/aws-s3-demo-website-vg6P",
-#             "CreatedAt": 1720772420966.0
-#         },
-#         {
-#             "Authors": [
-#                 "larisoncarvalho@gmail.com"
-#             ],
-#             "ResourceName": "1",
-#             "IsActive": "1",
-#             "SubResourceId": "/wfgrps/testWFG/wfs/1",
-#             "Description": "Automatically created by SG",
-#             "ResourceId": "/wfs/1",
-#             "WfType": "CUSTOM",
-#             "ModifiedAt": 1719465949087.0,
-#             "ParentId": "/orgs/charming-copper/wfgrps/testWFG",
-#             "LatestWfrunStatus": "ERRORED",
-#             "CreatedAt": 1719465947703.0,
-#             "Tags": [
-#                 "sg-created"
-#             ]
-#         }
-#     ]
-# }
-# '''
 serializer_str = generate_serializer(json_data, root_class_name="GeneratedSerializer")
 print(serializer_str)
